@@ -32,6 +32,25 @@ public class ProductoService
         return await query.OrderBy(p => p.Nombre).ToListAsync();
     }
 
+    public async Task<List<Producto>> BuscarParaVentaAsync(string textoBusqueda)
+    {
+        if (string.IsNullOrWhiteSpace(textoBusqueda))
+        {
+            return new List<Producto>();
+        }
+
+        var texto = textoBusqueda.Trim();
+
+        return await _dbContext.Productos
+            .Where(p => p.Activo && (
+                p.Nombre.Contains(texto) ||
+                p.Codigo.Contains(texto) ||
+                (p.CodigoBarras != null && p.CodigoBarras.Contains(texto))))
+            .OrderBy(p => p.Nombre)
+            .Take(30)
+            .ToListAsync();
+    }
+
     public async Task GuardarAsync(Producto producto)
     {
         if (producto.Id == 0)

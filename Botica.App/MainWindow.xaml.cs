@@ -1,4 +1,5 @@
 using System.Windows;
+using Botica.App.ViewModels;
 using Botica.App.Views;
 using Botica.Core.Entities;
 using Botica.Core.Services;
@@ -33,6 +34,22 @@ public partial class MainWindow : Window
         await _authService.CerrarSesionAsync(_usuario.Id);
         _cerrandoSesion = true;
         Close();
+    }
+
+    private void VentasButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<VentasWindow>();
+        ventana.ViewModel.EstablecerUsuario(_usuario.Id);
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
+    private void CajaButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<CajaWindow>();
+        ventana.ViewModel.EstablecerUsuario(_usuario.Id);
+        ventana.Owner = this;
+        ventana.ShowDialog();
     }
 
     private void ProductosButton_Click(object sender, RoutedEventArgs e)

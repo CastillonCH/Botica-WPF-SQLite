@@ -27,6 +27,8 @@
 
         <Border DockPanel.Dock="Left" Background="#ECF0F1" Width="180" Padding="8">
             <StackPanel>
+                <Button Content="Ventas" Click="VentasButton_Click" Margin="0,0,0,6" Height="34" />
+                <Button Content="Caja" Click="CajaButton_Click" Margin="0,0,0,16" Height="34" />
                 <Button Content="Productos" Click="ProductosButton_Click" Margin="0,0,0,6" Height="34" />
                 <Button Content="Categorías" Click="CategoriasButton_Click" Margin="0,0,0,6" Height="34" />
                 <Button Content="Laboratorios" Click="LaboratoriosButton_Click" Margin="0,0,0,6" Height="34" />
