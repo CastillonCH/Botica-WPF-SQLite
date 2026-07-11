@@ -1,24 +1,45 @@
-﻿using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Botica.Core.Entities;
+using Botica.Core.Services;
 
-namespace Botica.App
+namespace Botica.App;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private readonly Usuario _usuario;
+    private readonly AuthService _authService;
+    private bool _cerrandoSesion;
+
+    public event EventHandler? SesionCerrada;
+    public event EventHandler? AppCerrandose;
+
+    public MainWindow(Usuario usuario, AuthService authService)
     {
-        public MainWindow()
+        InitializeComponent();
+
+        _usuario = usuario;
+        _authService = authService;
+        UsuarioConectadoTextBlock.Text = $"{_usuario.NombreCompleto} ({_usuario.Rol})";
+
+        Closed += MainWindow_Closed;
+    }
+
+    private async void CerrarSesionButton_Click(object sender, RoutedEventArgs e)
+    {
+        await _authService.CerrarSesionAsync(_usuario.Id);
+        _cerrandoSesion = true;
+        Close();
+    }
+
+    private void MainWindow_Closed(object? sender, EventArgs e)
+    {
+        if (_cerrandoSesion)
         {
-            InitializeComponent();
+            SesionCerrada?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            AppCerrandose?.Invoke(this, EventArgs.Empty);
         }
     }
 }
