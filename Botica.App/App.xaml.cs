@@ -44,6 +44,7 @@ public partial class App : Application
         services.AddSingleton<LoteService>();
         services.AddSingleton<CompraService>();
         services.AddSingleton<DashboardService>();
+        services.AddSingleton<UsuarioService>();
 
         services.AddTransient<LoginViewModel>();
         services.AddTransient<LoginWindow>();
@@ -64,6 +65,8 @@ public partial class App : Application
         services.AddTransient<VencimientosViewModel>();
         services.AddTransient<VencimientosWindow>();
         services.AddTransient<DashboardViewModel>();
+        services.AddTransient<UsuariosViewModel>();
+        services.AddTransient<UsuariosWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)

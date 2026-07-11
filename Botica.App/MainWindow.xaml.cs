@@ -2,6 +2,7 @@ using System.Windows;
 using Botica.App.ViewModels;
 using Botica.App.Views;
 using Botica.Core.Entities;
+using Botica.Core.Enums;
 using Botica.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +27,7 @@ public partial class MainWindow : Window
         _authService = authService;
         _serviceProvider = serviceProvider;
         UsuarioConectadoTextBlock.Text = $"{_usuario.NombreCompleto} ({_usuario.Rol})";
+        UsuariosButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
 
         _dashboardViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
         DashboardScrollViewer.DataContext = _dashboardViewModel;
@@ -97,6 +99,13 @@ public partial class MainWindow : Window
     private void LaboratoriosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<LaboratoriosWindow>();
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
+    private void UsuariosButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<UsuariosWindow>();
         ventana.Owner = this;
         ventana.ShowDialog();
     }
