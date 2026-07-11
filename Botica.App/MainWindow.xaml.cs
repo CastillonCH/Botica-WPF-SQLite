@@ -67,6 +67,13 @@ public partial class MainWindow : Window
         ventana.ShowDialog();
     }
 
+    private void VencimientosButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<VencimientosWindow>();
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
     private void ProductosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<ProductosWindow>();

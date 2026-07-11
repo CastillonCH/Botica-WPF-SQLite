@@ -30,7 +30,8 @@
                 <Button Content="Ventas" Click="VentasButton_Click" Margin="0,0,0,6" Height="34" />
                 <Button Content="Caja" Click="CajaButton_Click" Margin="0,0,0,16" Height="34" />
                 <Button Content="Compras" Click="ComprasButton_Click" Margin="0,0,0,6" Height="34" />
-                <Button Content="Proveedores" Click="ProveedoresButton_Click" Margin="0,0,0,16" Height="34" />
+                <Button Content="Proveedores" Click="ProveedoresButton_Click" Margin="0,0,0,6" Height="34" />
+                <Button Content="Vencimientos" Click="VencimientosButton_Click" Margin="0,0,0,16" Height="34" />
                 <Button Content="Productos" Click="ProductosButton_Click" Margin="0,0,0,6" Height="34" />
                 <Button Content="Categorías" Click="CategoriasButton_Click" Margin="0,0,0,6" Height="34" />
                 <Button Content="Laboratorios" Click="LaboratoriosButton_Click" Margin="0,0,0,6" Height="34" />

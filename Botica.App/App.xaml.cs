@@ -60,6 +60,8 @@ public partial class App : Application
         services.AddTransient<ProveedoresWindow>();
         services.AddTransient<ComprasViewModel>();
         services.AddTransient<ComprasWindow>();
+        services.AddTransient<VencimientosViewModel>();
+        services.AddTransient<VencimientosWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)
