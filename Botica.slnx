@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Botica.App/Botica.App.csproj" />
+  <Project Path="Botica.Core/Botica.Core.csproj" />
+</Solution>
