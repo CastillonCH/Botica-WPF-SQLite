@@ -40,6 +40,9 @@ public partial class App : Application
         services.AddSingleton<ProductoService>();
         services.AddSingleton<CajaService>();
         services.AddSingleton<VentaService>();
+        services.AddSingleton<ProveedorService>();
+        services.AddSingleton<LoteService>();
+        services.AddSingleton<CompraService>();
 
         services.AddTransient<LoginViewModel>();
         services.AddTransient<LoginWindow>();
@@ -53,6 +56,10 @@ public partial class App : Application
         services.AddTransient<CajaWindow>();
         services.AddTransient<VentasViewModel>();
         services.AddTransient<VentasWindow>();
+        services.AddTransient<ProveedoresViewModel>();
+        services.AddTransient<ProveedoresWindow>();
+        services.AddTransient<ComprasViewModel>();
+        services.AddTransient<ComprasWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)

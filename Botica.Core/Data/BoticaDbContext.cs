@@ -19,6 +19,10 @@ public class BoticaDbContext : DbContext
     public DbSet<MovimientoCaja> MovimientosCaja => Set<MovimientoCaja>();
     public DbSet<Venta> Ventas => Set<Venta>();
     public DbSet<DetalleVenta> DetallesVenta => Set<DetalleVenta>();
+    public DbSet<Proveedor> Proveedores => Set<Proveedor>();
+    public DbSet<Lote> Lotes => Set<Lote>();
+    public DbSet<Compra> Compras => Set<Compra>();
+    public DbSet<DetalleCompra> DetallesCompra => Set<DetalleCompra>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -138,6 +142,45 @@ public class BoticaDbContext : DbContext
 
             entity.HasOne(d => d.Producto)
                 .WithMany(p => p.DetallesVenta)
+                .HasForeignKey(d => d.ProductoId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Lote>(entity =>
+        {
+            entity.HasOne(l => l.Producto)
+                .WithMany(p => p.Lotes)
+                .HasForeignKey(l => l.ProductoId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Compra>(entity =>
+        {
+            entity.Property(c => c.Total).HasPrecision(10, 2);
+
+            entity.HasOne(c => c.Proveedor)
+                .WithMany(p => p.Compras)
+                .HasForeignKey(c => c.ProveedorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(c => c.Usuario)
+                .WithMany()
+                .HasForeignKey(c => c.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<DetalleCompra>(entity =>
+        {
+            entity.Property(d => d.PrecioUnitario).HasPrecision(10, 2);
+            entity.Property(d => d.Subtotal).HasPrecision(10, 2);
+
+            entity.HasOne(d => d.Compra)
+                .WithMany(c => c.Detalles)
+                .HasForeignKey(d => d.CompraId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(d => d.Producto)
+                .WithMany()
                 .HasForeignKey(d => d.ProductoId)
                 .OnDelete(DeleteBehavior.Restrict);
         });

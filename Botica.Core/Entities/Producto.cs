@@ -23,4 +23,5 @@ public class Producto
     public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
     public ICollection<DetalleVenta> DetallesVenta { get; set; } = new List<DetalleVenta>();
+    public ICollection<Lote> Lotes { get; set; } = new List<Lote>();
 }

@@ -52,6 +52,21 @@ public partial class MainWindow : Window
         ventana.ShowDialog();
     }
 
+    private void ComprasButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<ComprasWindow>();
+        ventana.ViewModel.EstablecerUsuario(_usuario.Id);
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
+    private void ProveedoresButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<ProveedoresWindow>();
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
     private void ProductosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<ProductosWindow>();

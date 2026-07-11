@@ -27,12 +27,35 @@ public class VentaService
             }
 
             producto.StockActual -= detalle.Cantidad;
+            await ConsumirLotesFefoAsync(detalle.ProductoId, detalle.Cantidad);
         }
 
         _dbContext.Ventas.Add(venta);
         await _dbContext.SaveChangesAsync();
 
         return venta;
+    }
+
+    private async Task ConsumirLotesFefoAsync(int productoId, int cantidad)
+    {
+        var lotes = await _dbContext.Lotes
+            .Where(l => l.ProductoId == productoId && l.CantidadActual > 0)
+            .OrderBy(l => l.FechaVencimiento)
+            .ToListAsync();
+
+        var cantidadRestante = cantidad;
+
+        foreach (var lote in lotes)
+        {
+            if (cantidadRestante <= 0)
+            {
+                break;
+            }
+
+            var consumo = Math.Min(lote.CantidadActual, cantidadRestante);
+            lote.CantidadActual -= consumo;
+            cantidadRestante -= consumo;
+        }
     }
 
     public async Task<bool> AnularVentaAsync(int ventaId, string motivo)
