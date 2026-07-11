@@ -35,8 +35,18 @@ public partial class App : Application
             options.UseSqlite(BoticaDbPath.GetDefaultConnectionString()), ServiceLifetime.Singleton);
 
         services.AddSingleton<AuthService>();
+        services.AddSingleton<CategoriaService>();
+        services.AddSingleton<LaboratorioService>();
+        services.AddSingleton<ProductoService>();
+
         services.AddTransient<LoginViewModel>();
         services.AddTransient<LoginWindow>();
+        services.AddTransient<CategoriasViewModel>();
+        services.AddTransient<CategoriasWindow>();
+        services.AddTransient<LaboratoriosViewModel>();
+        services.AddTransient<LaboratoriosWindow>();
+        services.AddTransient<ProductosViewModel>();
+        services.AddTransient<ProductosWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)
@@ -69,7 +79,7 @@ public partial class App : Application
         }
 
         var usuario = ((LoginViewModel)loginWindow.DataContext).UsuarioAutenticado!;
-        var mainWindow = new MainWindow(usuario, _serviceProvider.GetRequiredService<AuthService>());
+        var mainWindow = new MainWindow(usuario, _serviceProvider.GetRequiredService<AuthService>(), _serviceProvider);
         mainWindow.SesionCerrada += (_, _) => MostrarLogin();
         mainWindow.AppCerrandose += (_, _) => Shutdown();
         mainWindow.Show();

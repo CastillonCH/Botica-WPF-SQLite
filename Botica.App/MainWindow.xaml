@@ -25,6 +25,14 @@
             </Grid>
         </Border>
 
+        <Border DockPanel.Dock="Left" Background="#ECF0F1" Width="180" Padding="8">
+            <StackPanel>
+                <Button Content="Productos" Click="ProductosButton_Click" Margin="0,0,0,6" Height="34" />
+                <Button Content="Categorías" Click="CategoriasButton_Click" Margin="0,0,0,6" Height="34" />
+                <Button Content="Laboratorios" Click="LaboratoriosButton_Click" Margin="0,0,0,6" Height="34" />
+            </StackPanel>
+        </Border>
+
         <Grid>
             <TextBlock Text="Dashboard (próximamente)" FontSize="20" HorizontalAlignment="Center"
                        VerticalAlignment="Center" Foreground="Gray" />
