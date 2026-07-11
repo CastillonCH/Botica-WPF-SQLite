@@ -12,6 +12,7 @@ public partial class MainWindow : Window
     private readonly Usuario _usuario;
     private readonly AuthService _authService;
     private readonly IServiceProvider _serviceProvider;
+    private readonly DashboardViewModel _dashboardViewModel;
     private bool _cerrandoSesion;
 
     public event EventHandler? SesionCerrada;
@@ -26,7 +27,12 @@ public partial class MainWindow : Window
         _serviceProvider = serviceProvider;
         UsuarioConectadoTextBlock.Text = $"{_usuario.NombreCompleto} ({_usuario.Rol})";
 
+        _dashboardViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+        DashboardScrollViewer.DataContext = _dashboardViewModel;
+
         Closed += MainWindow_Closed;
+        Loaded += async (_, _) => await _dashboardViewModel.CargarCommand.ExecuteAsync(null);
+        Activated += async (_, _) => await _dashboardViewModel.CargarCommand.ExecuteAsync(null);
     }
 
     private async void CerrarSesionButton_Click(object sender, RoutedEventArgs e)
