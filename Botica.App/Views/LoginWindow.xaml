@@ -5,36 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Botica - Iniciar sesión"
-        Height="360" Width="380"
+        Height="480" Width="820"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
-    <Grid Margin="24">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="24" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="12" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="16" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="8" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.05*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Botica" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" />
+        <!-- Panel de marca -->
+        <Border Grid.Column="0" Background="{StaticResource Brush.HeroGradient}">
+            <StackPanel VerticalAlignment="Center" Margin="48,0">
+                <Border Width="64" Height="64" CornerRadius="16" Background="#26FFFFFF"
+                        HorizontalAlignment="Left">
+                    <Grid>
+                        <Rectangle Width="30" Height="10" Fill="White" RadiusX="3" RadiusY="3"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Rectangle Width="10" Height="30" Fill="White" RadiusX="3" RadiusY="3"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
 
-        <StackPanel Grid.Row="2">
-            <TextBlock Text="Usuario" Margin="0,0,0,4" />
-            <TextBox x:Name="UsuarioTextBox" Text="{Binding NombreUsuario, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
+                <TextBlock Text="Botica" Foreground="White" FontSize="36" FontWeight="Bold" Margin="0,24,0,4" />
+                <TextBlock Text="Sistema de gestión para tu botica de barrio" Foreground="#CCFBF1" FontSize="15"
+                           TextWrapping="Wrap" Margin="0,0,0,32" MaxWidth="320" HorizontalAlignment="Left" />
 
-        <StackPanel Grid.Row="4">
-            <TextBlock Text="Contraseña" Margin="0,0,0,4" />
-            <PasswordBox x:Name="PasswordBox" KeyDown="PasswordBox_KeyDown" />
-        </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Ellipse Width="6" Height="6" Fill="#5EEAD4" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBlock Text="Ventas, caja e inventario en un solo lugar" Foreground="#E6FFFA" FontSize="13" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <Ellipse Width="6" Height="6" Fill="#5EEAD4" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBlock Text="Control de lotes y vencimientos (FEFO)" Foreground="#E6FFFA" FontSize="13" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse Width="6" Height="6" Fill="#5EEAD4" VerticalAlignment="Center" Margin="0,0,10,0" />
+                    <TextBlock Text="Reportes y respaldo de tu información" Foreground="#E6FFFA" FontSize="13" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
 
-        <TextBlock Grid.Row="6" Text="{Binding MensajeError}" Foreground="Red" TextWrapping="Wrap" />
+        <!-- Panel de formulario -->
+        <Grid Grid.Column="1" Background="{StaticResource Brush.Surface}">
+            <StackPanel VerticalAlignment="Center" Margin="56,0">
+                <TextBlock Text="Bienvenido de nuevo" FontSize="22" FontWeight="Bold" Margin="0,0,0,4" />
+                <TextBlock Text="Ingresa tus credenciales para continuar" Foreground="{StaticResource Brush.TextSecondary}"
+                           FontSize="13" Margin="0,0,0,28" />
 
-        <Button Grid.Row="8" Content="Ingresar" Height="36" Click="IngresarButton_Click" />
+                <TextBlock Text="USUARIO" FontSize="11" FontWeight="SemiBold"
+                           Foreground="{StaticResource Brush.TextSecondary}" Margin="0,0,0,6" />
+                <TextBox x:Name="UsuarioTextBox" Text="{Binding NombreUsuario, UpdateSourceTrigger=PropertyChanged}"
+                         Height="40" />
+
+                <TextBlock Text="CONTRASEÑA" FontSize="11" FontWeight="SemiBold"
+                           Foreground="{StaticResource Brush.TextSecondary}" Margin="0,20,0,6" />
+                <PasswordBox x:Name="PasswordBox" KeyDown="PasswordBox_KeyDown" Height="40" />
+
+                <TextBlock Text="{Binding MensajeError}" Foreground="{StaticResource Brush.Danger}"
+                           TextWrapping="Wrap" Margin="0,14,0,0" />
+
+                <Button Content="Ingresar" Height="44" Click="IngresarButton_Click" Margin="0,24,0,0"
+                        FontSize="14" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

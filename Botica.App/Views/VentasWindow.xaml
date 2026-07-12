@@ -114,7 +114,7 @@
             <TextBlock Text="Motivo de anulación" Margin="0,8,0,4" />
             <TextBox Text="{Binding MotivoAnulacion, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="Anular venta seleccionada" Command="{Binding AnularVentaCommand}" Margin="0,8,0,0"
-                    Height="32" />
+                    Height="32" Style="{StaticResource Style.DangerButton}" />
         </StackPanel>
     </Grid>
 </Window>

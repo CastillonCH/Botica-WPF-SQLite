@@ -41,7 +41,8 @@
 
             <TextBlock Text="{Binding Mensaje}" Foreground="Red" TextWrapping="Wrap" Margin="0,12,0,0" />
 
-            <Button Content="Nuevo" Command="{Binding NuevoCommand}" Margin="0,16,0,4" Height="32" />
+            <Button Content="Nuevo" Command="{Binding NuevoCommand}" Margin="0,16,0,4" Height="32"
+                    Style="{StaticResource Style.SecondaryButton}" />
             <Button Content="Guardar" Click="GuardarButton_Click" Margin="0,0,0,4" Height="32" />
             <Button Content="Activar / Desactivar" Command="{Binding CambiarEstadoCommand}" Height="32" />
         </StackPanel>
