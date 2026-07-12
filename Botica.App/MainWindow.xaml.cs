@@ -78,6 +78,14 @@ public partial class MainWindow : Window
         ventana.ShowDialog();
     }
 
+    private void InventarioButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<InventarioWindow>();
+        ventana.ViewModel.EstablecerUsuario(_usuario.Id);
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
     private void VencimientosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<VencimientosWindow>();

@@ -25,6 +25,7 @@ public class BoticaDbContext : DbContext
     public DbSet<DetalleCompra> DetallesCompra => Set<DetalleCompra>();
     public DbSet<ConfiguracionSistema> ConfiguracionSistema => Set<ConfiguracionSistema>();
     public DbSet<AuditoriaEvento> AuditoriaEventos => Set<AuditoriaEvento>();
+    public DbSet<AjusteInventario> AjustesInventario => Set<AjusteInventario>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -194,6 +195,19 @@ public class BoticaDbContext : DbContext
 
         modelBuilder.Entity<AuditoriaEvento>(entity =>
         {
+            entity.HasOne(a => a.Usuario)
+                .WithMany()
+                .HasForeignKey(a => a.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<AjusteInventario>(entity =>
+        {
+            entity.HasOne(a => a.Producto)
+                .WithMany()
+                .HasForeignKey(a => a.ProductoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             entity.HasOne(a => a.Usuario)
                 .WithMany()
                 .HasForeignKey(a => a.UsuarioId)
