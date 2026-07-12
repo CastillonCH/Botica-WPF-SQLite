@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Proveedores" Height="500" Width="750"
+        MinHeight="400" MinWidth="650"
         WindowStartupLocation="CenterOwner">
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
@@ -39,28 +40,30 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
-            <TextBlock Text="Razón social" Margin="0,0,0,4" />
-            <TextBox Text="{Binding ProveedorSeleccionado.RazonSocial, UpdateSourceTrigger=PropertyChanged}" />
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Razón social" Margin="0,0,0,4" />
+                <TextBox Text="{Binding ProveedorSeleccionado.RazonSocial, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="RUC" Margin="0,8,0,4" />
-            <TextBox Text="{Binding ProveedorSeleccionado.Ruc, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="RUC" Margin="0,8,0,4" />
+                <TextBox Text="{Binding ProveedorSeleccionado.Ruc, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="Dirección" Margin="0,8,0,4" />
-            <TextBox Text="{Binding ProveedorSeleccionado.Direccion, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Dirección" Margin="0,8,0,4" />
+                <TextBox Text="{Binding ProveedorSeleccionado.Direccion, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="Teléfono" Margin="0,8,0,4" />
-            <TextBox Text="{Binding ProveedorSeleccionado.Telefono, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Text="Teléfono" Margin="0,8,0,4" />
+                <TextBox Text="{Binding ProveedorSeleccionado.Telefono, UpdateSourceTrigger=PropertyChanged}" />
 
-            <CheckBox Content="Activo" IsChecked="{Binding ProveedorSeleccionado.Activo}" Margin="0,12,0,0" />
+                <CheckBox Content="Activo" IsChecked="{Binding ProveedorSeleccionado.Activo}" Margin="0,12,0,0" />
 
-            <TextBlock Text="{Binding Mensaje}" Foreground="Red" TextWrapping="Wrap" Margin="0,12,0,0" />
+                <TextBlock Text="{Binding Mensaje}" Foreground="Red" TextWrapping="Wrap" Margin="0,12,0,0" />
 
-            <Button Content="Nuevo" Command="{Binding NuevoCommand}" Margin="0,16,0,4" Height="32"
-                    Style="{StaticResource Style.SecondaryButton}" />
-            <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="0,0,0,4" Height="32" />
-            <Button Content="Eliminar" Command="{Binding EliminarCommand}" Height="32"
-                    Style="{StaticResource Style.DangerButton}" />
-        </StackPanel>
+                <Button Content="Nuevo" Command="{Binding NuevoCommand}" Margin="0,16,0,4" Height="32"
+                        Style="{StaticResource Style.SecondaryButton}" />
+                <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="0,0,0,4" Height="32" />
+                <Button Content="Eliminar" Command="{Binding EliminarCommand}" Height="32"
+                        Style="{StaticResource Style.DangerButton}" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

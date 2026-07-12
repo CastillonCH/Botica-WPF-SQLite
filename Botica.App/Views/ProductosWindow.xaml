@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Productos" Height="650" Width="1050"
+        MinHeight="550" MinWidth="900"
         WindowStartupLocation="CenterOwner">
     <Grid Margin="12">
         <Grid.ColumnDefinitions>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Ventas" Height="700" Width="1100"
+        MinHeight="600" MinWidth="950"
         WindowStartupLocation="CenterOwner">
     <Grid Margin="12">
         <Grid.ColumnDefinitions>
@@ -78,7 +79,8 @@
         <Button Grid.Row="6" Grid.Column="0" Content="Quitar del carrito" Command="{Binding QuitarDelCarritoCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Width="140" />
 
-        <StackPanel Grid.Row="0" Grid.RowSpan="7" Grid.Column="2">
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="7" Grid.Column="2" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
             <TextBlock Text="Subtotal" FontSize="14" />
             <TextBlock Text="{Binding SubtotalSinIgv, StringFormat={}S/ {0:N2}}" FontSize="18" Margin="0,0,0,8" />
 
@@ -116,5 +118,6 @@
             <Button Content="Anular venta seleccionada" Command="{Binding AnularVentaCommand}" Margin="0,8,0,0"
                     Height="32" Style="{StaticResource Style.DangerButton}" />
         </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
