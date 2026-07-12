@@ -49,6 +49,7 @@ public partial class App : Application
         services.AddSingleton<ConfiguracionService>();
         services.AddSingleton<AuditoriaService>();
         services.AddSingleton<InventarioService>();
+        services.AddSingleton<ReportesService>();
 
         services.AddTransient<LoginViewModel>();
         services.AddTransient<LoginWindow>();
@@ -81,6 +82,8 @@ public partial class App : Application
         services.AddTransient<AuditoriaWindow>();
         services.AddTransient<InventarioViewModel>();
         services.AddTransient<InventarioWindow>();
+        services.AddTransient<ReportesViewModel>();
+        services.AddTransient<ReportesWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)
