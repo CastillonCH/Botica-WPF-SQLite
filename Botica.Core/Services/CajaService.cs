@@ -53,17 +53,22 @@ public class CajaService
     {
         var caja = await _dbContext.Cajas.FirstAsync(c => c.Id == cajaId);
 
-        var ingresos = await _dbContext.MovimientosCaja
+        // SQLite no soporta SUM sobre columnas decimal a nivel de SQL: se trae la
+        // lista y se suma en memoria.
+        var ingresos = (await _dbContext.MovimientosCaja
             .Where(m => m.CajaId == cajaId && m.Tipo == TipoMovimientoCaja.Ingreso)
-            .SumAsync(m => m.Monto);
+            .Select(m => m.Monto)
+            .ToListAsync()).Sum();
 
-        var egresos = await _dbContext.MovimientosCaja
+        var egresos = (await _dbContext.MovimientosCaja
             .Where(m => m.CajaId == cajaId && m.Tipo == TipoMovimientoCaja.Egreso)
-            .SumAsync(m => m.Monto);
+            .Select(m => m.Monto)
+            .ToListAsync()).Sum();
 
-        var ventasEfectivo = await _dbContext.Ventas
+        var ventasEfectivo = (await _dbContext.Ventas
             .Where(v => v.CajaId == cajaId && v.Estado == EstadoVenta.Emitida && v.MetodoPago == MetodoPago.Efectivo)
-            .SumAsync(v => v.Total);
+            .Select(v => v.Total)
+            .ToListAsync()).Sum();
 
         return caja.MontoApertura + ingresos - egresos + ventasEfectivo;
     }
