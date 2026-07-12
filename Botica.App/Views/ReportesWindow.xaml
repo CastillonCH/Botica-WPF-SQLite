@@ -45,7 +45,14 @@
                             HorizontalAlignment="Left" Width="160" Height="32" />
 
                     <StackPanel Grid.Row="2">
-                        <TextBlock Text="Ventas por producto" FontWeight="Bold" Margin="0,0,0,4" />
+                        <Grid Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ventas por producto" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarVentasPorProducto_Click" Width="90" />
+                        </Grid>
                         <DataGrid ItemsSource="{Binding VentasPorProducto}" AutoGenerateColumns="False"
                                   IsReadOnly="True" Height="100">
                             <DataGrid.Columns>
@@ -57,7 +64,14 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="3">
-                        <TextBlock Text="Ventas por usuario" FontWeight="Bold" Margin="0,8,0,4" />
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ventas por usuario" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarVentasPorUsuario_Click" Width="90" />
+                        </Grid>
                         <DataGrid ItemsSource="{Binding VentasPorUsuario}" AutoGenerateColumns="False"
                                   IsReadOnly="True" Height="100">
                             <DataGrid.Columns>
@@ -69,7 +83,14 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="4">
-                        <TextBlock Text="Compras por proveedor" FontWeight="Bold" Margin="0,8,0,4" />
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Compras por proveedor" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarComprasPorProveedor_Click" Width="90" />
+                        </Grid>
                         <DataGrid ItemsSource="{Binding ComprasPorProveedor}" AutoGenerateColumns="False"
                                   IsReadOnly="True" Height="100">
                             <DataGrid.Columns>
@@ -81,7 +102,14 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="5">
-                        <TextBlock Text="Ganancias por día" FontWeight="Bold" Margin="0,8,0,4" />
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ganancias por día" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarGananciasPorDia_Click" Width="90" />
+                        </Grid>
                         <DataGrid ItemsSource="{Binding GananciasPorDia}" AutoGenerateColumns="False"
                                   IsReadOnly="True" Height="100">
                             <DataGrid.Columns>

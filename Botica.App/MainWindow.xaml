@@ -46,7 +46,10 @@
                             Height="34" />
                     <Button x:Name="ConfiguracionButton" Content="Configuración" Click="ConfiguracionButton_Click"
                             Margin="0,0,0,6" Height="34" />
-                    <Button x:Name="AuditoriaButton" Content="Auditoría" Click="AuditoriaButton_Click" Height="34" />
+                    <Button x:Name="AuditoriaButton" Content="Auditoría" Click="AuditoriaButton_Click"
+                            Margin="0,0,0,6" Height="34" />
+                    <Button x:Name="ImportacionButton" Content="Importación" Click="ImportacionButton_Click"
+                            Height="34" />
                 </StackPanel>
             </ScrollViewer>
         </Border>
