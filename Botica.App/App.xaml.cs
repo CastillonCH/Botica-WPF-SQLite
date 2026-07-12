@@ -51,9 +51,12 @@ public partial class App : Application
         services.AddSingleton<InventarioService>();
         services.AddSingleton<ReportesService>();
         services.AddSingleton<ImportService>();
+        services.AddSingleton<RecuperacionContrasenaService>();
 
         services.AddTransient<LoginViewModel>();
         services.AddTransient<LoginWindow>();
+        services.AddTransient<RecuperarContrasenaViewModel>();
+        services.AddTransient<RecuperarContrasenaWindow>();
         services.AddTransient<CategoriasViewModel>();
         services.AddTransient<CategoriasWindow>();
         services.AddTransient<LaboratoriosViewModel>();

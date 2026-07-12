@@ -37,6 +37,9 @@
                 <TextBlock Text="Rol" Margin="0,8,0,4" />
                 <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding UsuarioSeleccionado.Rol}" />
 
+                <TextBlock Text="Correo (para recuperar contraseña)" Margin="0,8,0,4" TextWrapping="Wrap" />
+                <TextBox Text="{Binding UsuarioSeleccionado.Email, UpdateSourceTrigger=PropertyChanged}" />
+
                 <TextBlock Text="Contraseña (dejar vacío para no cambiar)" Margin="0,8,0,4" TextWrapping="Wrap" />
                 <controls:PasswordRevealBox x:Name="PasswordBox" />
 

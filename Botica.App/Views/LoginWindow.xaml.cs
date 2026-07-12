@@ -1,18 +1,21 @@
 using System.Windows;
 using System.Windows.Input;
 using Botica.App.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Botica.App.Views;
 
 public partial class LoginWindow : Window
 {
     private readonly LoginViewModel _viewModel;
+    private readonly IServiceProvider _serviceProvider;
 
-    public LoginWindow(LoginViewModel viewModel)
+    public LoginWindow(LoginViewModel viewModel, IServiceProvider serviceProvider)
     {
         InitializeComponent();
 
         _viewModel = viewModel;
+        _serviceProvider = serviceProvider;
         DataContext = _viewModel;
         _viewModel.InicioSesionExitoso += (_, _) =>
         {
@@ -32,5 +35,12 @@ public partial class LoginWindow : Window
         {
             await _viewModel.IniciarSesionCommand.ExecuteAsync(PasswordBox.Password);
         }
+    }
+
+    private void OlvideContrasenaButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<RecuperarContrasenaWindow>();
+        ventana.Owner = this;
+        ventana.ShowDialog();
     }
 }
