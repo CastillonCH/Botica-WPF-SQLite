@@ -42,7 +42,8 @@
                 <Button x:Name="BackupsButton" Content="Respaldos" Click="BackupsButton_Click" Margin="0,0,0,6"
                         Height="34" />
                 <Button x:Name="ConfiguracionButton" Content="Configuración" Click="ConfiguracionButton_Click"
-                        Height="34" />
+                        Margin="0,0,0,6" Height="34" />
+                <Button x:Name="AuditoriaButton" Content="Auditoría" Click="AuditoriaButton_Click" Height="34" />
             </StackPanel>
         </Border>
 

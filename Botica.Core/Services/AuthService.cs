@@ -64,4 +64,13 @@ public class AuthService
 
         return null;
     }
+
+    public async Task<List<HistorialAcceso>> ObtenerHistorialAccesosAsync(int limite = 200)
+    {
+        return await _dbContext.HistorialAccesos
+            .Include(h => h.Usuario)
+            .OrderByDescending(h => h.FechaHora)
+            .Take(limite)
+            .ToListAsync();
+    }
 }

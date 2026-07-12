@@ -24,6 +24,7 @@ public class BoticaDbContext : DbContext
     public DbSet<Compra> Compras => Set<Compra>();
     public DbSet<DetalleCompra> DetallesCompra => Set<DetalleCompra>();
     public DbSet<ConfiguracionSistema> ConfiguracionSistema => Set<ConfiguracionSistema>();
+    public DbSet<AuditoriaEvento> AuditoriaEventos => Set<AuditoriaEvento>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -189,6 +190,14 @@ public class BoticaDbContext : DbContext
         modelBuilder.Entity<ConfiguracionSistema>(entity =>
         {
             entity.Property(c => c.TasaIgv).HasPrecision(5, 4);
+        });
+
+        modelBuilder.Entity<AuditoriaEvento>(entity =>
+        {
+            entity.HasOne(a => a.Usuario)
+                .WithMany()
+                .HasForeignKey(a => a.UsuarioId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

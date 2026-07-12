@@ -30,6 +30,7 @@ public partial class MainWindow : Window
         UsuariosButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
         BackupsButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
         ConfiguracionButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
+        AuditoriaButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
 
         _dashboardViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
         DashboardScrollViewer.DataContext = _dashboardViewModel;
@@ -87,6 +88,7 @@ public partial class MainWindow : Window
     private void ProductosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<ProductosWindow>();
+        ventana.ViewModel.EstablecerUsuario(_usuario.Id);
         ventana.Owner = this;
         ventana.ShowDialog();
     }
@@ -130,6 +132,13 @@ public partial class MainWindow : Window
     private void ConfiguracionButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<ConfiguracionWindow>();
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
+    private void AuditoriaButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<AuditoriaWindow>();
         ventana.Owner = this;
         ventana.ShowDialog();
     }

@@ -11,6 +11,7 @@ public partial class ProductosViewModel : ObservableObject
     private readonly ProductoService _productoService;
     private readonly CategoriaService _categoriaService;
     private readonly LaboratorioService _laboratorioService;
+    private int _usuarioId;
 
     public ObservableCollection<Producto> Productos { get; } = new();
     public ObservableCollection<Categoria> CategoriasDisponibles { get; } = new();
@@ -32,6 +33,8 @@ public partial class ProductosViewModel : ObservableObject
         _categoriaService = categoriaService;
         _laboratorioService = laboratorioService;
     }
+
+    public void EstablecerUsuario(int usuarioId) => _usuarioId = usuarioId;
 
     [RelayCommand]
     private async Task CargarAsync()
@@ -80,7 +83,7 @@ public partial class ProductosViewModel : ObservableObject
 
         try
         {
-            await _productoService.GuardarAsync(ProductoSeleccionado);
+            await _productoService.GuardarAsync(ProductoSeleccionado, _usuarioId);
             Mensaje = string.Empty;
             await BuscarAsync();
             Nuevo();
@@ -99,7 +102,7 @@ public partial class ProductosViewModel : ObservableObject
             return;
         }
 
-        var eliminado = await _productoService.EliminarAsync(ProductoSeleccionado.Id);
+        var eliminado = await _productoService.EliminarAsync(ProductoSeleccionado.Id, _usuarioId);
         Mensaje = eliminado ? string.Empty : "No se puede eliminar: tiene ventas registradas. Desactívelo en su lugar.";
         await BuscarAsync();
         Nuevo();
@@ -113,7 +116,7 @@ public partial class ProductosViewModel : ObservableObject
             return;
         }
 
-        await _productoService.CambiarEstadoAsync(ProductoSeleccionado.Id);
+        await _productoService.CambiarEstadoAsync(ProductoSeleccionado.Id, _usuarioId);
         await BuscarAsync();
         Nuevo();
     }

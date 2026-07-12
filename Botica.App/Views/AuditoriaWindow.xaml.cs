@@ -3,14 +3,11 @@ using Botica.App.ViewModels;
 
 namespace Botica.App.Views;
 
-public partial class ProductosWindow : Window
+public partial class AuditoriaWindow : Window
 {
-    public ProductosViewModel ViewModel { get; }
-
-    public ProductosWindow(ProductosViewModel viewModel)
+    public AuditoriaWindow(AuditoriaViewModel viewModel)
     {
         InitializeComponent();
-        ViewModel = viewModel;
         DataContext = viewModel;
         Loaded += async (_, _) => await viewModel.CargarCommand.ExecuteAsync(null);
     }
