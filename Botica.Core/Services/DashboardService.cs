@@ -21,17 +21,22 @@ public class DashboardService
 
         var ventasEmitidas = _dbContext.Ventas.Where(v => v.Estado == EstadoVenta.Emitida);
 
-        var ventasDelDia = await ventasEmitidas
+        // SQLite no soporta SUM sobre columnas decimal a nivel de SQL: se trae la
+        // lista y se suma en memoria.
+        var ventasDelDia = (await ventasEmitidas
             .Where(v => v.FechaHora.Date == hoy)
-            .SumAsync(v => (decimal?)v.Total) ?? 0m;
+            .Select(v => v.Total)
+            .ToListAsync()).Sum();
 
-        var ventasDelMes = await ventasEmitidas
+        var ventasDelMes = (await ventasEmitidas
             .Where(v => v.FechaHora >= inicioMes)
-            .SumAsync(v => (decimal?)v.Total) ?? 0m;
+            .Select(v => v.Total)
+            .ToListAsync()).Sum();
 
-        var comprasDelMes = await _dbContext.Compras
+        var comprasDelMes = (await _dbContext.Compras
             .Where(c => c.FechaCompra >= inicioMes)
-            .SumAsync(c => (decimal?)c.Total) ?? 0m;
+            .Select(c => c.Total)
+            .ToListAsync()).Sum();
 
         var detallesDelMes = await _dbContext.DetallesVenta
             .Include(d => d.Producto)

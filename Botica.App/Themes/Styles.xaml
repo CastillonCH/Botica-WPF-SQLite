@@ -121,7 +121,9 @@
         </Setter>
     </Style>
 
-    <!-- TextBox / PasswordBox: bordes redondeados, foco animado -->
+    <!-- TextBox / PasswordBox: se usa la plantilla nativa de Windows (garantiza que el
+         texto se renderice correctamente) y solo se ajustan colores, bordes y el
+         resaltado al enfocar mediante triggers, sin reemplazar el ControlTemplate. -->
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="{StaticResource Brush.Surface}" />
         <Setter Property="Foreground" Value="{StaticResource Brush.TextPrimary}" />
@@ -131,28 +133,15 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="CaretBrush" Value="{StaticResource Brush.Primary}" />
         <Setter Property="SelectionBrush" Value="{StaticResource Brush.PrimaryLight}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="TextBox">
-                    <Border x:Name="border" Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6"
-                            SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
-                                      VerticalAlignment="Center" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Brush.Primary}" />
-                            <Setter TargetName="border" Property="BorderThickness" Value="2" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="border" Property="Background" Value="{StaticResource Brush.Background}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.Primary}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource Brush.Background}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style TargetType="PasswordBox">
@@ -164,25 +153,12 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="CaretBrush" Value="{StaticResource Brush.Primary}" />
         <Setter Property="SelectionBrush" Value="{StaticResource Brush.PrimaryLight}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="PasswordBox">
-                    <Border x:Name="border" Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6"
-                            SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
-                                      VerticalAlignment="Center" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Brush.Primary}" />
-                            <Setter TargetName="border" Property="BorderThickness" Value="2" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.Primary}" />
+                <Setter Property="BorderThickness" Value="2" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!-- ComboBox / DatePicker / CheckBox: ajustes ligeros sin retemplar (bajo riesgo) -->
