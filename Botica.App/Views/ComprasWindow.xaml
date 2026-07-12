@@ -52,59 +52,73 @@
             <Button Grid.Column="4" Content="Agregar" Command="{Binding AgregarAlCarritoCommand}" Width="90" />
         </Grid>
 
-        <DataGrid Grid.Row="6" ItemsSource="{Binding ResultadosBusqueda}"
-                  SelectedItem="{Binding ProductoSeleccionadoBusqueda, Mode=TwoWay}"
-                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" MaxHeight="140"
-                  VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="80" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                <DataGridTextColumn Header="P. Compra" Binding="{Binding PrecioCompra, StringFormat={}{0:N2}}" Width="80" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="12" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="4" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="6" Text="Detalle de compra" FontWeight="Bold" Margin="0,150,0,0" VerticalAlignment="Top" />
+            <DataGrid Grid.Row="0" ItemsSource="{Binding ResultadosBusqueda}"
+                      SelectedItem="{Binding ProductoSeleccionadoBusqueda, Mode=TwoWay}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" MaxHeight="140">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="80" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                    <DataGridTextColumn Header="P. Compra" Binding="{Binding PrecioCompra, StringFormat={}{0:N2}}" Width="80" />
+                </DataGrid.Columns>
+            </DataGrid>
 
-        <DataGrid Grid.Row="6" Margin="0,174,0,0" ItemsSource="{Binding Carrito}"
-                  SelectedItem="{Binding ItemSeleccionado, Mode=TwoWay}"
-                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="70" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                <DataGridTemplateColumn Header="Cantidad" Width="70">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding Cantidad, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="P. Unitario" Width="80">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding PrecioUnitario, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="N° Lote" Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding NumeroLote, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Vencimiento" Width="120">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding FechaVencimiento, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat={}{0:N2}}" Width="80" />
-            </DataGrid.Columns>
-        </DataGrid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Detalle de compra" FontWeight="Bold" VerticalAlignment="Center" />
+                <Button Grid.Column="2" Content="Quitar" Command="{Binding QuitarDelCarritoCommand}" Width="100" />
+            </Grid>
 
-        <Button Grid.Row="6" Content="Quitar" Command="{Binding QuitarDelCarritoCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,150,0,0" Width="100" />
+            <DataGrid Grid.Row="4" ItemsSource="{Binding Carrito}"
+                      SelectedItem="{Binding ItemSeleccionado, Mode=TwoWay}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="70" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                    <DataGridTemplateColumn Header="Cantidad" Width="70">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Cantidad, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="P. Unitario" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding PrecioUnitario, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="N° Lote" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding NumeroLote, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Vencimiento" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding FechaVencimiento, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal, StringFormat={}{0:N2}}" Width="80" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 
         <Grid Grid.Row="8">
             <Grid.ColumnDefinitions>
