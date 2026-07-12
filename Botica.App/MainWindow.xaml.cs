@@ -1,4 +1,6 @@
+using System.Globalization;
 using System.Windows;
+using System.Windows.Threading;
 using Botica.App.ViewModels;
 using Botica.App.Views;
 using Botica.Core.Entities;
@@ -10,10 +12,13 @@ namespace Botica.App;
 
 public partial class MainWindow : Window
 {
+    private static readonly CultureInfo CulturaFechaHora = new("es-PE");
+
     private readonly Usuario _usuario;
     private readonly AuthService _authService;
     private readonly IServiceProvider _serviceProvider;
     private readonly DashboardViewModel _dashboardViewModel;
+    private readonly DispatcherTimer _relojTimer;
     private bool _cerrandoSesion;
 
     public event EventHandler? SesionCerrada;
@@ -43,9 +48,23 @@ public partial class MainWindow : Window
         _dashboardViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
         DashboardScrollViewer.DataContext = _dashboardViewModel;
 
+        ActualizarRelojEncabezado();
+        _relojTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _relojTimer.Tick += (_, _) => ActualizarRelojEncabezado();
+        _relojTimer.Start();
+
         Closed += MainWindow_Closed;
+        Closed += (_, _) => _relojTimer.Stop();
         Loaded += async (_, _) => await _dashboardViewModel.CargarCommand.ExecuteAsync(null);
         Activated += async (_, _) => await _dashboardViewModel.CargarCommand.ExecuteAsync(null);
+    }
+
+    private void ActualizarRelojEncabezado()
+    {
+        var ahora = DateTime.Now;
+        var fecha = ahora.ToString("dddd, d 'de' MMMM 'de' yyyy", CulturaFechaHora);
+        FechaTextBlock.Text = char.ToUpper(fecha[0], CulturaFechaHora) + fecha[1..];
+        HoraTextBlock.Text = ahora.ToString("HH:mm:ss", CulturaFechaHora);
     }
 
     private async void CerrarSesionButton_Click(object sender, RoutedEventArgs e)
