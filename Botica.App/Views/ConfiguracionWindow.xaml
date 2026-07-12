@@ -3,34 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Botica.App.Controls"
         mc:Ignorable="d"
-        Title="Configuración" Height="480" Width="420"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <StackPanel Margin="20">
-        <TextBlock Text="Empresa" FontWeight="Bold" FontSize="14" Margin="0,0,0,8" />
+        Title="Configuración" Height="760" Width="440"
+        MinHeight="420" MinWidth="380"
+        WindowStartupLocation="CenterOwner">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
+            <TextBlock Text="Empresa" FontWeight="Bold" FontSize="14" Margin="0,0,0,8" />
 
-        <TextBlock Text="Nombre de la empresa" Margin="0,0,0,4" />
-        <TextBox Text="{Binding Configuracion.NombreEmpresa, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Nombre de la empresa" Margin="0,0,0,4" />
+            <TextBox Text="{Binding Configuracion.NombreEmpresa, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="RUC" Margin="0,8,0,4" />
-        <TextBox Text="{Binding Configuracion.Ruc, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="RUC" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.Ruc, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="Dirección" Margin="0,8,0,4" />
-        <TextBox Text="{Binding Configuracion.Direccion, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Dirección" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.Direccion, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="Teléfono" Margin="0,8,0,4" />
-        <TextBox Text="{Binding Configuracion.Telefono, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Teléfono" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.Telefono, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="Sistema" FontWeight="Bold" FontSize="14" Margin="0,20,0,8" />
+            <TextBlock Text="Sistema" FontWeight="Bold" FontSize="14" Margin="0,20,0,8" />
 
-        <TextBlock Text="Tasa de IGV (ej. 0.18 = 18%)" Margin="0,0,0,4" />
-        <TextBox Text="{Binding Configuracion.TasaIgv, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Tasa de IGV (ej. 0.18 = 18%)" Margin="0,0,0,4" />
+            <TextBox Text="{Binding Configuracion.TasaIgv, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="Símbolo de moneda" Margin="0,8,0,4" />
-        <TextBox Text="{Binding Configuracion.Moneda, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="Símbolo de moneda" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.Moneda, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock Text="{Binding Mensaje}" Foreground="DarkGreen" TextWrapping="Wrap" Margin="0,12,0,0" />
+            <TextBlock Text="Correo (para recuperar contraseñas)" FontWeight="Bold" FontSize="14" Margin="0,20,0,4" />
+            <TextBlock Text="Para que los usuarios puedan recuperar su contraseña por correo, configura aquí una cuenta que pueda enviar correos (ej. Gmail con una contraseña de aplicación)."
+                       Foreground="{StaticResource Brush.TextSecondary}" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,8" />
 
-        <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="0,16,0,0" Height="36" />
-    </StackPanel>
+            <TextBlock Text="Servidor SMTP (ej. smtp.gmail.com)" Margin="0,0,0,4" />
+            <TextBox Text="{Binding Configuracion.SmtpHost, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Puerto (ej. 587)" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.SmtpPuerto, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Correo remitente" Margin="0,8,0,4" />
+            <TextBox Text="{Binding Configuracion.SmtpUsuario, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Contraseña / clave de aplicación" Margin="0,8,0,4" />
+            <controls:PasswordRevealBox Password="{Binding Configuracion.SmtpContrasena, UpdateSourceTrigger=PropertyChanged}" />
+
+            <CheckBox Content="Usar conexión segura (SSL/TLS)" IsChecked="{Binding Configuracion.SmtpUsarSsl}" Margin="0,12,0,0" />
+
+            <TextBlock Text="{Binding Mensaje}" Foreground="{StaticResource Brush.Success}" TextWrapping="Wrap" Margin="0,12,0,0" />
+
+            <Button Content="Guardar" Command="{Binding GuardarCommand}" Margin="0,16,0,0" Height="36" />
+        </StackPanel>
+    </ScrollViewer>
 </Window>

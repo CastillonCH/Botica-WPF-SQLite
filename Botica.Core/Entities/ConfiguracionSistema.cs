@@ -9,4 +9,11 @@ public class ConfiguracionSistema
     public string? Telefono { get; set; }
     public decimal TasaIgv { get; set; } = 0.18m;
     public string Moneda { get; set; } = "S/";
+
+    public string? SmtpHost { get; set; }
+    public int SmtpPuerto { get; set; } = 587;
+    public string? SmtpUsuario { get; set; }
+    public string? SmtpContrasena { get; set; }
+    public bool SmtpUsarSsl { get; set; } = true;
+    public string? SmtpRemitente { get; set; }
 }

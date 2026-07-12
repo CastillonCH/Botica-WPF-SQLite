@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Botica" Height="680" Width="1150"
-        WindowStartupLocation="CenterScreen">
+        MinHeight="560" MinWidth="960"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <Style x:Key="Style.SidebarButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />

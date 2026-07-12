@@ -11,6 +11,9 @@ public class Usuario
     public RolUsuario Rol { get; set; }
     public bool Activo { get; set; } = true;
     public DateTime FechaCreacion { get; set; } = DateTime.Now;
+    public string? Email { get; set; }
+    public string? CodigoRecuperacion { get; set; }
+    public DateTime? CodigoRecuperacionExpira { get; set; }
 
     public ICollection<HistorialAcceso> HistorialAccesos { get; set; } = new List<HistorialAcceso>();
 }

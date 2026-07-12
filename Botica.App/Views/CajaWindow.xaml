@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Caja" Height="600" Width="750"
+        MinHeight="480" MinWidth="650"
         WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
@@ -52,35 +53,37 @@
                 </DataGrid>
             </StackPanel>
 
-            <StackPanel Grid.Column="2">
-                <TextBlock Text="Registrar movimiento" FontWeight="Bold" Margin="0,0,0,8" />
-                <TextBlock Text="Concepto" Margin="0,0,0,4" />
-                <TextBox Text="{Binding ConceptoMovimiento, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Text="Monto" Margin="0,8,0,4" />
-                <TextBox Text="{Binding MontoMovimiento, UpdateSourceTrigger=PropertyChanged}" />
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Registrar movimiento" FontWeight="Bold" Margin="0,0,0,8" />
+                    <TextBlock Text="Concepto" Margin="0,0,0,4" />
+                    <TextBox Text="{Binding ConceptoMovimiento, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Monto" Margin="0,8,0,4" />
+                    <TextBox Text="{Binding MontoMovimiento, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Grid Margin="0,8,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="8" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Ingreso" Command="{Binding RegistrarIngresoCommand}" Height="32" />
-                    <Button Grid.Column="2" Content="Egreso" Command="{Binding RegistrarEgresoCommand}" Height="32" />
-                </Grid>
+                    <Grid Margin="0,8,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="8" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Ingreso" Command="{Binding RegistrarIngresoCommand}" Height="32" />
+                        <Button Grid.Column="2" Content="Egreso" Command="{Binding RegistrarEgresoCommand}" Height="32" />
+                    </Grid>
 
-                <Separator Margin="0,20,0,20" />
+                    <Separator Margin="0,20,0,20" />
 
-                <TextBlock Text="Cierre de caja" FontWeight="Bold" Margin="0,0,0,8" />
-                <Button Content="Calcular monto de sistema" Command="{Binding CalcularCierreCommand}" Height="32" />
-                <TextBlock Text="{Binding MontoSistemaCalculado, StringFormat={}Monto de sistema: S/ {0:N2}}"
-                           Margin="0,8,0,8" />
+                    <TextBlock Text="Cierre de caja" FontWeight="Bold" Margin="0,0,0,8" />
+                    <Button Content="Calcular monto de sistema" Command="{Binding CalcularCierreCommand}" Height="32" />
+                    <TextBlock Text="{Binding MontoSistemaCalculado, StringFormat={}Monto de sistema: S/ {0:N2}}"
+                               Margin="0,8,0,8" />
 
-                <TextBlock Text="Monto declarado (arqueo)" Margin="0,0,0,4" />
-                <TextBox Text="{Binding MontoDeclaradoCierre, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Text="Monto declarado (arqueo)" Margin="0,0,0,4" />
+                    <TextBox Text="{Binding MontoDeclaradoCierre, UpdateSourceTrigger=PropertyChanged}" />
 
-                <Button Content="Cerrar caja" Command="{Binding CerrarCajaCommand}" Margin="0,12,0,0" Height="36" />
-            </StackPanel>
+                    <Button Content="Cerrar caja" Command="{Binding CerrarCajaCommand}" Margin="0,12,0,0" Height="36" />
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
