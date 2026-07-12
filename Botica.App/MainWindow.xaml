@@ -1,12 +1,163 @@
-﻿<Window x:Class="Botica.App.MainWindow"
+<Window x:Class="Botica.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Botica.App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Botica" Height="600" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#2C3E50" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-    </Grid>
+                <TextBlock Grid.Column="0" Text="Botica" Foreground="White" FontSize="18" FontWeight="Bold"
+                           VerticalAlignment="Center" />
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock x:Name="UsuarioConectadoTextBlock" Foreground="White" VerticalAlignment="Center"
+                               Margin="0,0,16,0" />
+                    <Button Content="Cambiar contraseña" Click="CambiarContrasenaButton_Click" Padding="10,4"
+                            Margin="0,0,8,0" />
+                    <Button Content="Cerrar sesión" Click="CerrarSesionButton_Click" Padding="10,4" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border DockPanel.Dock="Left" Background="#ECF0F1" Width="180" Padding="8">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <Button Content="Ventas" Click="VentasButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Caja" Click="CajaButton_Click" Margin="0,0,0,16" Height="34" />
+                    <Button Content="Compras" Click="ComprasButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Proveedores" Click="ProveedoresButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Inventario" Click="InventarioButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Vencimientos" Click="VencimientosButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Reportes" Click="ReportesButton_Click" Margin="0,0,0,16" Height="34" />
+                    <Button Content="Productos" Click="ProductosButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Categorías" Click="CategoriasButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button Content="Laboratorios" Click="LaboratoriosButton_Click" Margin="0,0,0,6" Height="34" />
+                    <Button x:Name="UsuariosButton" Content="Usuarios" Click="UsuariosButton_Click" Margin="0,16,0,6"
+                            Height="34" />
+                    <Button x:Name="BackupsButton" Content="Respaldos" Click="BackupsButton_Click" Margin="0,0,0,6"
+                            Height="34" />
+                    <Button x:Name="ConfiguracionButton" Content="Configuración" Click="ConfiguracionButton_Click"
+                            Margin="0,0,0,6" Height="34" />
+                    <Button x:Name="AuditoriaButton" Content="Auditoría" Click="AuditoriaButton_Click"
+                            Margin="0,0,0,6" Height="34" />
+                    <Button x:Name="ImportacionButton" Content="Importación" Click="ImportacionButton_Click"
+                            Height="34" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <ScrollViewer x:Name="DashboardScrollViewer" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="16">
+                <UniformGrid Columns="4" Rows="2">
+                    <Border Background="#3498DB" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Ventas del día" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding VentasDelDia, StringFormat={}S/ {0:N2}}" Foreground="White"
+                                       FontSize="20" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#2ECC71" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Ventas del mes" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding VentasDelMes, StringFormat={}S/ {0:N2}}" Foreground="White"
+                                       FontSize="20" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#9B59B6" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Compras del mes" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding ComprasDelMes, StringFormat={}S/ {0:N2}}" Foreground="White"
+                                       FontSize="20" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#16A085" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Ganancia del mes" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding GananciaDelMes, StringFormat={}S/ {0:N2}}" Foreground="White"
+                                       FontSize="20" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#F39C12" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Stock bajo" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding ProductosStockBajo}" Foreground="White" FontSize="20"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#E74C3C" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Agotados" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding ProductosAgotados}" Foreground="White" FontSize="20"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#D35400" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Próx. a vencer (90d)" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding ProductosProximosAVencer}" Foreground="White" FontSize="20"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#7F8C8D" Margin="4" Padding="12" CornerRadius="4">
+                        <StackPanel>
+                            <TextBlock Text="Vencidos" Foreground="White" FontSize="12" />
+                            <TextBlock Text="{Binding ProductosVencidos}" Foreground="White" FontSize="20"
+                                       FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+
+                <Grid Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="12" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Productos más vendidos (mes)" FontWeight="Bold" Margin="0,0,0,4" />
+                        <DataGrid ItemsSource="{Binding ProductosMasVendidos}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" Height="200">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto" Binding="{Binding Nombre}" Width="*" />
+                                <DataGridTextColumn Header="Cant." Binding="{Binding CantidadVendida}" Width="50" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Últimas ventas" FontWeight="Bold" Margin="0,0,0,4" />
+                        <DataGrid ItemsSource="{Binding UltimasVentas}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  Height="200">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Fecha" Binding="{Binding FechaHora, StringFormat={}{0:g}}" Width="110" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Últimas compras" FontWeight="Bold" Margin="0,0,0,4" />
+                        <DataGrid ItemsSource="{Binding UltimasCompras}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  Height="200">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor.RazonSocial}" Width="*" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="70" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Window>

@@ -1,0 +1,34 @@
+<Window x:Class="Botica.App.Views.ImportacionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Importación desde Excel" Height="420" Width="480"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <StackPanel Margin="20">
+        <TextBlock Text="Importar desde Excel (.xlsx)" FontSize="16" FontWeight="Bold" Margin="0,0,0,4" />
+        <TextBlock Text="La primera fila debe contener encabezados; se ignora al importar." TextWrapping="Wrap"
+                    Foreground="Gray" Margin="0,0,0,16" />
+
+        <TextBlock Text="Categorías" FontWeight="Bold" Margin="0,0,0,2" />
+        <TextBlock Text="Columnas: Nombre, Descripción" Foreground="Gray" FontSize="11" Margin="0,0,0,4" />
+        <Button Content="Importar categorías" Click="ImportarCategorias_Click" Height="32" Margin="0,0,0,12" />
+
+        <TextBlock Text="Laboratorios" FontWeight="Bold" Margin="0,0,0,2" />
+        <TextBlock Text="Columnas: Nombre" Foreground="Gray" FontSize="11" Margin="0,0,0,4" />
+        <Button Content="Importar laboratorios" Click="ImportarLaboratorios_Click" Height="32" Margin="0,0,0,12" />
+
+        <TextBlock Text="Proveedores" FontWeight="Bold" Margin="0,0,0,2" />
+        <TextBlock Text="Columnas: Razón social, RUC, Dirección, Teléfono" Foreground="Gray" FontSize="11"
+                    Margin="0,0,0,4" />
+        <Button Content="Importar proveedores" Click="ImportarProveedores_Click" Height="32" Margin="0,0,0,12" />
+
+        <TextBlock Text="Productos" FontWeight="Bold" Margin="0,0,0,2" />
+        <TextBlock Text="Columnas: Código, Nombre, Precio compra, Precio venta, Stock mínimo, Stock actual"
+                    Foreground="Gray" FontSize="11" Margin="0,0,0,4" />
+        <Button Content="Importar productos" Click="ImportarProductos_Click" Height="32" />
+
+        <TextBlock Text="{Binding Mensaje}" Foreground="DarkGreen" TextWrapping="Wrap" Margin="0,16,0,0" />
+    </StackPanel>
+</Window>

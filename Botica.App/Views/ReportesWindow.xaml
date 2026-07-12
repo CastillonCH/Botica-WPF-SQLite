@@ -1,0 +1,177 @@
+<Window x:Class="Botica.App.Views.ReportesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Reportes" Height="700" Width="1000"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="8" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="8" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Desde" VerticalAlignment="Center" />
+            <DatePicker Grid.Column="2" SelectedDate="{Binding Desde}" Width="130" />
+            <TextBlock Grid.Column="4" Text="Hasta" VerticalAlignment="Center" />
+            <DatePicker Grid.Column="6" SelectedDate="{Binding Hasta}" Width="130" />
+        </Grid>
+
+        <TabControl Grid.Row="2">
+            <TabItem Header="Ventas y compras">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="8" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Content="Generar reportes" Command="{Binding GenerarVentasComprasCommand}"
+                            HorizontalAlignment="Left" Width="160" Height="32" />
+
+                    <StackPanel Grid.Row="2">
+                        <Grid Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ventas por producto" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarVentasPorProducto_Click" Width="90" />
+                        </Grid>
+                        <DataGrid ItemsSource="{Binding VentasPorProducto}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" Height="100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto" Binding="{Binding Producto}" Width="*" />
+                                <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="90" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3">
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ventas por usuario" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarVentasPorUsuario_Click" Width="90" />
+                        </Grid>
+                        <DataGrid ItemsSource="{Binding VentasPorUsuario}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" Height="100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Usuario" Binding="{Binding Usuario}" Width="*" />
+                                <DataGridTextColumn Header="N° ventas" Binding="{Binding CantidadVentas}" Width="80" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="90" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4">
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Compras por proveedor" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarComprasPorProveedor_Click" Width="90" />
+                        </Grid>
+                        <DataGrid ItemsSource="{Binding ComprasPorProveedor}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" Height="100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor}" Width="*" />
+                                <DataGridTextColumn Header="N° compras" Binding="{Binding CantidadCompras}" Width="80" />
+                                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="90" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5">
+                        <Grid Margin="0,8,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Ganancias por día" FontWeight="Bold" />
+                            <Button Grid.Column="1" Content="Exportar" Click="ExportarGananciasPorDia_Click" Width="90" />
+                        </Grid>
+                        <DataGrid ItemsSource="{Binding GananciasPorDia}" AutoGenerateColumns="False"
+                                  IsReadOnly="True" Height="100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat={}{0:d}}" Width="90" />
+                                <DataGridTextColumn Header="Ventas" Binding="{Binding Ventas, StringFormat={}{0:N2}}" Width="90" />
+                                <DataGridTextColumn Header="Costo est." Binding="{Binding CostoEstimado, StringFormat={}{0:N2}}" Width="90" />
+                                <DataGridTextColumn Header="Ganancia" Binding="{Binding Ganancia, StringFormat={}{0:N2}}" Width="90" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Inventario">
+                <Grid Margin="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="8" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Content="Cargar inventario" Command="{Binding CargarInventarioCommand}"
+                            HorizontalAlignment="Left" Width="160" Height="32" />
+
+                    <StackPanel Grid.Row="2">
+                        <TextBlock Text="Stock actual" FontWeight="Bold" Margin="0,0,0,4" />
+                        <DataGrid ItemsSource="{Binding StockActual}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  Height="130">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto" Binding="{Binding Nombre}" Width="*" />
+                                <DataGridTextColumn Header="Stock" Binding="{Binding StockActual}" Width="70" />
+                                <DataGridTextColumn Header="Mínimo" Binding="{Binding StockMinimo}" Width="70" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="3">
+                        <TextBlock Text="Stock bajo" FontWeight="Bold" Margin="0,8,0,4" />
+                        <DataGrid ItemsSource="{Binding StockBajo}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  Height="110">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto" Binding="{Binding Nombre}" Width="*" />
+                                <DataGridTextColumn Header="Stock" Binding="{Binding StockActual}" Width="70" />
+                                <DataGridTextColumn Header="Mínimo" Binding="{Binding StockMinimo}" Width="70" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4">
+                        <TextBlock Text="Productos agotados" FontWeight="Bold" Margin="0,8,0,4" />
+                        <DataGrid ItemsSource="{Binding Agotados}" AutoGenerateColumns="False" IsReadOnly="True"
+                                  Height="110">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Producto" Binding="{Binding Nombre}" Width="*" />
+                                <DataGridTextColumn Header="Código" Binding="{Binding Codigo}" Width="100" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
