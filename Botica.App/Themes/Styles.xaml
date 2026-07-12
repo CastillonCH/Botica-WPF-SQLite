@@ -43,9 +43,11 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="8"
                             SnapsToDevicePixels="True">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <TextBlock x:Name="label" Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin="{TemplateBinding Padding}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -56,7 +58,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="border" Property="Background" Value="#CBD5E1" />
-                            <Setter Property="Foreground" Value="#94A3B8" />
+                            <Setter TargetName="label" Property="Foreground" Value="#94A3B8" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -75,9 +77,11 @@
                     <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="8"
                             BorderBrush="{StaticResource Brush.Primary}" BorderThickness="1.5"
                             SnapsToDevicePixels="True">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <TextBlock x:Name="label" Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin="{TemplateBinding Padding}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -88,7 +92,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="border" Property="BorderBrush" Value="#CBD5E1" />
-                            <Setter Property="Foreground" Value="#94A3B8" />
+                            <Setter TargetName="label" Property="Foreground" Value="#94A3B8" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -104,9 +108,11 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="8"
                             SnapsToDevicePixels="True">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
-                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                          TextElement.Foreground="{TemplateBinding Foreground}" />
+                        <TextBlock x:Name="label" Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="{TemplateBinding FontWeight}" FontSize="{TemplateBinding FontSize}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Margin="{TemplateBinding Padding}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -117,7 +123,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="border" Property="Background" Value="#CBD5E1" />
-                            <Setter Property="Foreground" Value="#94A3B8" />
+                            <Setter TargetName="label" Property="Foreground" Value="#94A3B8" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
