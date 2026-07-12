@@ -103,6 +103,14 @@ public partial class MainWindow : Window
         ventana.ShowDialog();
     }
 
+    private void CambiarContrasenaButton_Click(object sender, RoutedEventArgs e)
+    {
+        var ventana = _serviceProvider.GetRequiredService<CambiarContrasenaWindow>();
+        ((CambiarContrasenaViewModel)ventana.DataContext).EstablecerUsuario(_usuario.Id);
+        ventana.Owner = this;
+        ventana.ShowDialog();
+    }
+
     private void UsuariosButton_Click(object sender, RoutedEventArgs e)
     {
         var ventana = _serviceProvider.GetRequiredService<UsuariosWindow>();

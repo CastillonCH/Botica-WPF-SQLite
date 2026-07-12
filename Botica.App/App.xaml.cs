@@ -67,6 +67,8 @@ public partial class App : Application
         services.AddTransient<DashboardViewModel>();
         services.AddTransient<UsuariosViewModel>();
         services.AddTransient<UsuariosWindow>();
+        services.AddTransient<CambiarContrasenaViewModel>();
+        services.AddTransient<CambiarContrasenaWindow>();
     }
 
     private static void SembrarUsuarioAdministrador(BoticaDbContext dbContext)

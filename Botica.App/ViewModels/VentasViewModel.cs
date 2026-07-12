@@ -20,6 +20,7 @@ public partial class VentasViewModel : ObservableObject
 
     public ObservableCollection<Producto> ResultadosBusqueda { get; } = new();
     public ObservableCollection<ItemCarritoVenta> Carrito { get; } = new();
+    public ObservableCollection<Venta> HistorialCajaActual { get; } = new();
 
     [ObservableProperty]
     private string textoBusqueda = string.Empty;
@@ -41,6 +42,12 @@ public partial class VentasViewModel : ObservableObject
 
     [ObservableProperty]
     private bool hayCajaAbierta;
+
+    [ObservableProperty]
+    private Venta? ventaSeleccionadaHistorial;
+
+    [ObservableProperty]
+    private string motivoAnulacion = string.Empty;
 
     public IEnumerable<MetodoPago> MetodosPago => Enum.GetValues<MetodoPago>();
 
@@ -64,6 +71,35 @@ public partial class VentasViewModel : ObservableObject
         _cajaActual = await _cajaService.ObtenerCajaAbiertaAsync();
         HayCajaAbierta = _cajaActual is not null;
         Mensaje = HayCajaAbierta ? string.Empty : "No hay una caja abierta. Ábrala desde el módulo de Caja.";
+
+        HistorialCajaActual.Clear();
+        if (_cajaActual is not null)
+        {
+            foreach (var venta in await _ventaService.ObtenerPorCajaAsync(_cajaActual.Id))
+            {
+                HistorialCajaActual.Add(venta);
+            }
+        }
+    }
+
+    [RelayCommand]
+    private async Task AnularVentaAsync()
+    {
+        if (VentaSeleccionadaHistorial is null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(MotivoAnulacion))
+        {
+            Mensaje = "Ingrese el motivo de la anulación.";
+            return;
+        }
+
+        await _ventaService.AnularVentaAsync(VentaSeleccionadaHistorial.Id, MotivoAnulacion);
+        MotivoAnulacion = string.Empty;
+        Mensaje = "Venta anulada correctamente.";
+        await CargarAsync();
     }
 
     [RelayCommand]
@@ -175,6 +211,7 @@ public partial class VentasViewModel : ObservableObject
         {
             await _ventaService.RegistrarVentaAsync(venta);
             Mensaje = $"Venta registrada. Vuelto: {Vuelto:N2}";
+            HistorialCajaActual.Insert(0, venta);
             NuevaVenta();
         }
         catch (InvalidOperationException ex)

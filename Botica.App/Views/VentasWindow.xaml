@@ -99,6 +99,22 @@
 
             <Button Content="Confirmar venta" Command="{Binding ConfirmarVentaCommand}" Margin="0,24,0,4" Height="40" />
             <Button Content="Nueva venta" Command="{Binding NuevaVentaCommand}" Height="32" />
+
+            <TextBlock Text="Ventas de esta caja" FontWeight="Bold" Margin="0,24,0,4" />
+            <DataGrid ItemsSource="{Binding HistorialCajaActual}"
+                      SelectedItem="{Binding VentaSeleccionadaHistorial, Mode=TwoWay}"
+                      AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Height="150">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Hora" Binding="{Binding FechaHora, StringFormat={}{0:t}}" Width="60" />
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat={}{0:N2}}" Width="60" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="70" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Motivo de anulación" Margin="0,8,0,4" />
+            <TextBox Text="{Binding MotivoAnulacion, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Anular venta seleccionada" Command="{Binding AnularVentaCommand}" Margin="0,8,0,0"
+                    Height="32" />
         </StackPanel>
     </Grid>
 </Window>

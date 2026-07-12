@@ -45,4 +45,23 @@ public class AuthService
         });
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<string?> CambiarContrasenaAsync(int usuarioId, string contrasenaActual, string contrasenaNueva)
+    {
+        var usuario = await _dbContext.Usuarios.FindAsync(usuarioId);
+        if (usuario is null || !PasswordHasher.Verify(contrasenaActual, usuario.PasswordHash))
+        {
+            return "La contraseña actual es incorrecta.";
+        }
+
+        if (string.IsNullOrWhiteSpace(contrasenaNueva) || contrasenaNueva.Length < 4)
+        {
+            return "La nueva contraseña debe tener al menos 4 caracteres.";
+        }
+
+        usuario.PasswordHash = PasswordHasher.Hash(contrasenaNueva);
+        await _dbContext.SaveChangesAsync();
+
+        return null;
+    }
 }

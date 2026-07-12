@@ -20,6 +20,8 @@
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <TextBlock x:Name="UsuarioConectadoTextBlock" Foreground="White" VerticalAlignment="Center"
                                Margin="0,0,16,0" />
+                    <Button Content="Cambiar contraseña" Click="CambiarContrasenaButton_Click" Padding="10,4"
+                            Margin="0,0,8,0" />
                     <Button Content="Cerrar sesión" Click="CerrarSesionButton_Click" Padding="10,4" />
                 </StackPanel>
             </Grid>
