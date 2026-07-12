@@ -82,7 +82,7 @@
             <TextBlock Text="Subtotal" FontSize="14" />
             <TextBlock Text="{Binding SubtotalSinIgv, StringFormat={}S/ {0:N2}}" FontSize="18" Margin="0,0,0,8" />
 
-            <TextBlock Text="IGV (18%)" FontSize="14" />
+            <TextBlock Text="{Binding EtiquetaIgv}" FontSize="14" />
             <TextBlock Text="{Binding Igv, StringFormat={}S/ {0:N2}}" FontSize="18" Margin="0,0,0,8" />
 
             <TextBlock Text="Total" FontSize="14" FontWeight="Bold" />

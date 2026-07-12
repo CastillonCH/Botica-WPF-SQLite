@@ -10,13 +10,13 @@ namespace Botica.App.ViewModels;
 
 public partial class VentasViewModel : ObservableObject
 {
-    private const decimal TasaIgv = 0.18m;
-
     private readonly ProductoService _productoService;
     private readonly VentaService _ventaService;
     private readonly CajaService _cajaService;
+    private readonly ConfiguracionService _configuracionService;
     private int _usuarioId;
     private Caja? _cajaActual;
+    private decimal _tasaIgv = 0.18m;
 
     public ObservableCollection<Producto> ResultadosBusqueda { get; } = new();
     public ObservableCollection<ItemCarritoVenta> Carrito { get; } = new();
@@ -52,15 +52,17 @@ public partial class VentasViewModel : ObservableObject
     public IEnumerable<MetodoPago> MetodosPago => Enum.GetValues<MetodoPago>();
 
     public decimal Total => Carrito.Sum(i => i.Subtotal);
-    public decimal Igv => Total - Total / (1 + TasaIgv);
+    public decimal Igv => Total - Total / (1 + _tasaIgv);
     public decimal SubtotalSinIgv => Total - Igv;
     public decimal Vuelto => MontoRecibido - Total;
 
-    public VentasViewModel(ProductoService productoService, VentaService ventaService, CajaService cajaService)
+    public VentasViewModel(ProductoService productoService, VentaService ventaService, CajaService cajaService,
+        ConfiguracionService configuracionService)
     {
         _productoService = productoService;
         _ventaService = ventaService;
         _cajaService = cajaService;
+        _configuracionService = configuracionService;
     }
 
     public void EstablecerUsuario(int usuarioId) => _usuarioId = usuarioId;
@@ -68,6 +70,9 @@ public partial class VentasViewModel : ObservableObject
     [RelayCommand]
     private async Task CargarAsync()
     {
+        _tasaIgv = (await _configuracionService.ObtenerAsync()).TasaIgv;
+        NotificarTotales();
+
         _cajaActual = await _cajaService.ObtenerCajaAbiertaAsync();
         HayCajaAbierta = _cajaActual is not null;
         Mensaje = HayCajaAbierta ? string.Empty : "No hay una caja abierta. Ábrala desde el módulo de Caja.";
@@ -252,5 +257,8 @@ public partial class VentasViewModel : ObservableObject
         OnPropertyChanged(nameof(Igv));
         OnPropertyChanged(nameof(SubtotalSinIgv));
         OnPropertyChanged(nameof(Vuelto));
+        OnPropertyChanged(nameof(EtiquetaIgv));
     }
+
+    public string EtiquetaIgv => $"IGV ({_tasaIgv:P0})";
 }

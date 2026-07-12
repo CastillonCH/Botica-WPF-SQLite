@@ -23,6 +23,7 @@ public class BoticaDbContext : DbContext
     public DbSet<Lote> Lotes => Set<Lote>();
     public DbSet<Compra> Compras => Set<Compra>();
     public DbSet<DetalleCompra> DetallesCompra => Set<DetalleCompra>();
+    public DbSet<ConfiguracionSistema> ConfiguracionSistema => Set<ConfiguracionSistema>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -183,6 +184,11 @@ public class BoticaDbContext : DbContext
                 .WithMany()
                 .HasForeignKey(d => d.ProductoId)
                 .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<ConfiguracionSistema>(entity =>
+        {
+            entity.Property(c => c.TasaIgv).HasPrecision(5, 4);
         });
     }
 }
