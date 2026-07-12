@@ -29,7 +29,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Crear respaldo" Command="{Binding CrearRespaldoCommand}" Height="36" />
-            <Button Grid.Column="2" Content="Restaurar seleccionado" Click="RestaurarButton_Click" Height="36" />
+            <Button Grid.Column="2" Content="Restaurar seleccionado" Click="RestaurarButton_Click" Height="36"
+                    Style="{StaticResource Style.DangerButton}" />
         </Grid>
     </Grid>
 </Window>

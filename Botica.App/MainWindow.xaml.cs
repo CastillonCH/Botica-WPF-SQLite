@@ -27,11 +27,18 @@ public partial class MainWindow : Window
         _authService = authService;
         _serviceProvider = serviceProvider;
         UsuarioConectadoTextBlock.Text = $"{_usuario.NombreCompleto} ({_usuario.Rol})";
-        UsuariosButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
-        BackupsButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
-        ConfiguracionButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
-        AuditoriaButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
-        ImportacionButton.Visibility = _usuario.Rol == RolUsuario.Administrador ? Visibility.Visible : Visibility.Collapsed;
+        InicialUsuarioTextBlock.Text = _usuario.NombreCompleto.Length > 0
+            ? _usuario.NombreCompleto[..1].ToUpperInvariant()
+            : "?";
+
+        var esAdministrador = _usuario.Rol == RolUsuario.Administrador;
+        var visibilidadAdmin = esAdministrador ? Visibility.Visible : Visibility.Collapsed;
+        AdministracionLabel.Visibility = visibilidadAdmin;
+        UsuariosButton.Visibility = visibilidadAdmin;
+        BackupsButton.Visibility = visibilidadAdmin;
+        ConfiguracionButton.Visibility = visibilidadAdmin;
+        AuditoriaButton.Visibility = visibilidadAdmin;
+        ImportacionButton.Visibility = visibilidadAdmin;
 
         _dashboardViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
         DashboardScrollViewer.DataContext = _dashboardViewModel;
